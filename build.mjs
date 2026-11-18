@@ -6,13 +6,20 @@
  * All the words live in this file, one block per language (English, French, Spanish).
  * The pages have no JavaScript, no cookies, no trackers and no outside fonts or scripts.
  *
- * BEFORE THE APP STORE RELEASE: replace CONTACT_EMAIL below, run `node build.mjs`, commit, push.
+ * Made by Little Ladybug Labs (D39). After changing anything here: `node build.mjs`, commit, push.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-// ---- Fill in before release (docs/handoff/before-release.md in the app repository) ----
-const CONTACT_EMAIL = 'CONTACT_EMAIL_PLACEHOLDER';
+// ---- Studio and contact (D39) ----
+const STUDIO = 'Little Ladybug Labs'; // always in English, in every language
+const CONTACT_EMAIL = 'littleladybuglabs@gmail.com';
+/** "Made by …" in each language; the studio name stays in English (marked lang="en" for screen readers). */
+const MADE_BY = {
+  en: `Made by ${STUDIO}`,
+  fr: `Créé par <span lang="en">${STUDIO}</span>`,
+  es: `Creado por <span lang="en">${STUDIO}</span>`,
+};
 const UPDATED = { en: 'November 18, 2026', fr: '18 novembre 2026', es: '18 de noviembre de 2026' };
 
 const LANGS = ['en', 'fr', 'es'];
@@ -418,7 +425,7 @@ ${LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${link(depth, he
 <main>
 ${body}
 </main>
-<footer><p>Flame Friend · ${t.nav.privacy}: <a href="${link(depth, `${dir(lang)}privacy/`)}">${link(0, `${dir(lang)}privacy/`)}</a></p></footer>
+<footer><p>Flame Friend · ${MADE_BY[lang]} · ${mail()}</p></footer>
 </body>
 </html>
 `;
